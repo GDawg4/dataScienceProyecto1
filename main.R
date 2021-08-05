@@ -1,5 +1,5 @@
-# Title     : TODO
-# Objective : TODO
+# Title     : SCHOOLS GUATEMALA
+# Objective : CLEANING DATA FOR ANALISYS
 # Created by: Rodrigo Garoz
 # Created on: 18/07/2021)
 library(ggplot2)
@@ -122,7 +122,7 @@ all_raw$status <- tolower(all_raw$status)
 all_raw$language <- tolower(all_raw$language)
 all_raw$time <- tolower(all_raw$time)
 all_raw$mun <- tolower(all_raw$mun)
-all_raw$frequency <- tolower(all_raw$frequency)
+all_raw$fwrite.csv(Your DataFrame,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)requency <- tolower(all_raw$frequency)
 
 base_table <- setDT(all_raw)
 
@@ -151,4 +151,16 @@ base_tibble <- base_tibble %>% as.data.frame() %>% separate(localCode, into=c('d
 base_tibble <- base_tibble %>% as.data.frame() %>% separate(munCode, into=c('depCode2', 'distrCode'), sep='-')
 base_tibble <- as_tibble(base_tibble)
 summary(base_tibble)
+
+#Eliminando direccion, supervisores, numero de telefono y headmaster
+base_tibble$address <- NULL
+base_tibble$headmaster <- NULL
+base_tibble$cellPhone <- NULL
+base_tibble$supervisor <- NULL
+
+#Check the final dataset
+view(base_tibble)
+
+#Export the new dataset
+write.csv(base_tibble,"sources/final_dataset.csv", row.names = FALSE)
 base_tibble[base_tibble$name == 'LICEO SECRETARIAL BILINGÜE',]
