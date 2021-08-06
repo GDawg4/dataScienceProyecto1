@@ -12,6 +12,7 @@ library(tibble)
 library(stringr)
 library(forcats)
 library(data.table)
+library(devtools)
 
 av_raw <- read.csv('sources/altaVerapaz.csv', sep=';', encoding = "UTF-8")
 av_raw<-head(av_raw,-2)
@@ -122,7 +123,8 @@ all_raw$status <- tolower(all_raw$status)
 all_raw$language <- tolower(all_raw$language)
 all_raw$time <- tolower(all_raw$time)
 all_raw$mun <- tolower(all_raw$mun)
-all_raw$fwrite.csv(Your DataFrame,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)requency <- tolower(all_raw$frequency)
+all_raw$fequency <- tolower(all_raw$frequency)
+write.csv(Your DataFrame,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)
 
 base_table <- setDT(all_raw)
 
@@ -146,6 +148,10 @@ base_tibble$frequency <- as.factor(base_tibble$frequency)
 base_tibble$dep2 <- as.factor(base_tibble$dep2)
 ggplot(base_tibble, aes(dep)) + geom_bar()
 
+base_tibble <- safe_measure
+
+base_tibble <- separate(base_tibble, col=localCode, into=c('dep0', 'dep1', 'dep2', 'dep3'), sep = '-')
+base_tibble <- separate(base_tibble, col=munCode, into=c('mun0', 'mun1'), sep = '-')
 
 base_tibble <- base_tibble %>% as.data.frame() %>% separate(localCode, into=c('depCode', 'munCode', 'extra1', 'extra2'), sep='-')
 base_tibble <- base_tibble %>% as.data.frame() %>% separate(munCode, into=c('depCode2', 'distrCode'), sep='-')
@@ -164,3 +170,5 @@ view(base_tibble)
 #Export the new dataset
 write.csv(base_tibble,"sources/final_dataset.csv", row.names = FALSE)
 base_tibble[base_tibble$name == 'LICEO SECRETARIAL BILINGÜE',]
+
+mixco <- base_tibble[base_tibble$dep=='guatemala' & base_tibble$mun=='mixco' & base_tibble$name %like% 'secretarial',]
