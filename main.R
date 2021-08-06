@@ -124,7 +124,7 @@ all_raw$language <- tolower(all_raw$language)
 all_raw$time <- tolower(all_raw$time)
 all_raw$mun <- tolower(all_raw$mun)
 all_raw$fequency <- tolower(all_raw$frequency)
-write.csv(Your DataFrame,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)
+#write.csv(Your DataFrame,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)
 
 base_table <- setDT(all_raw)
 
