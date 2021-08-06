@@ -159,6 +159,8 @@ base_tibble <- as_tibble(base_tibble)
 summary(base_tibble)
 
 #Eliminando direccion, supervisores, numero de telefono y headmaster
+base_tibble$dep2 <- NULL
+base_tibble$dep3<- NULL
 base_tibble$address <- NULL
 base_tibble$headmaster <- NULL
 base_tibble$cellPhone <- NULL
